@@ -20,4 +20,29 @@ class NotFoundError extends ApiError {
   }
 }
 
-module.exports = { ApiError, BadRequestError, NotFoundError };
+class UnauthorizedError extends ApiError {
+  constructor(message = 'Unauthorized') {
+    super(401, message);
+  }
+}
+
+class ForbiddenError extends ApiError {
+  constructor(message = 'Forbidden') {
+    super(403, message);
+  }
+}
+
+class ConflictError extends ApiError {
+  constructor(message = 'Conflict') {
+    super(409, message);
+  }
+}
+
+module.exports = {
+  ApiError,
+  BadRequestError,
+  NotFoundError,
+  UnauthorizedError,
+  ForbiddenError,
+  ConflictError
+};

@@ -15,7 +15,9 @@ const config = {
   mediaBaseUrl: process.env.MEDIA_BASE_URL || '',
   nodeEnv: process.env.NODE_ENV || 'development',
   defaultPageSize: 20,
-  maxPageSize: 100
+  maxPageSize: 100,
+  jwtSecret: process.env.JWT_SECRET || 'dev-secret-change-me',
+  jwtExpiresIn: process.env.JWT_EXPIRES_IN || '7d'
 };
 
 module.exports = config;

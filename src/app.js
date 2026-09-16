@@ -10,6 +10,8 @@ const requestLogger = require('./middleware/requestLogger');
 const { notFoundHandler, errorHandler } = require('./middleware/errorHandler');
 const exercisesRouter = require('./routes/exercises');
 const metadataRouter = require('./routes/metadata');
+const authRouter = require('./routes/auth');
+const routinesRouter = require('./routes/routines');
 
 const app = express();
 
@@ -43,6 +45,8 @@ app.use('/exercises', exercisesRouter);
 app.use('/', metadataRouter); // /categories, /body-parts, /equipment
 
 // 404 + error handlers (must be last)
+app.use('/auth', authRouter);
+app.use('/routines', routinesRouter);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
