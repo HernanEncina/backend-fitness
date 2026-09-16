@@ -1,0 +1,41 @@
+'use strict';
+
+const db = require('../src/db');
+
+const SCHEMA = `
+CREATE TABLE IF NOT EXISTS exercises (
+  id                TEXT PRIMARY KEY,
+  name              TEXT NOT NULL,
+  category          TEXT,
+  body_part         TEXT,
+  equipment         TEXT,
+  instructions_en   TEXT,
+  instructions_es   TEXT,
+  instructions_it   TEXT,
+  instructions_tr   TEXT,
+  instructions_ru   TEXT,
+  instructions_zh   TEXT,
+  instructions_hi   TEXT,
+  instructions_pl   TEXT,
+  instructions_ko   TEXT,
+  instructions_fr   TEXT,
+  muscle_group      TEXT,
+  secondary_muscles TEXT,
+  target            TEXT,
+  image             TEXT,
+  gif_url           TEXT,
+  created_at        TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_exercises_category     ON exercises(category);
+CREATE INDEX IF NOT EXISTS idx_exercises_body_part    ON exercises(body_part);
+CREATE INDEX IF NOT EXISTS idx_exercises_equipment    ON exercises(equipment);
+CREATE INDEX IF NOT EXISTS idx_exercises_muscle_group ON exercises(muscle_group);
+CREATE INDEX IF NOT EXISTS idx_exercises_target       ON exercises(target);
+CREATE INDEX IF NOT EXISTS idx_exercises_name_nocase  ON exercises(name COLLATE NOCASE);
+`;
+
+db.exec(SCHEMA);
+console.log('Schema created (or already existed).');
+console.log(`Rows in exercises: ${db.prepare('SELECT COUNT(*) AS c FROM exercises').get().c}`);
+db.close();
